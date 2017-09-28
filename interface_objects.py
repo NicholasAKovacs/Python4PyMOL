@@ -11,7 +11,7 @@ def interface_objects(object1, object2, cutoff=1.0):
 
 	# set up variable names so I don't have to write so many quotes later
 	cmpx,ch1,ch2='cmpx','ch1','ch2'
-	interface_selection = "interface_selection"
+	interface_selection = object1+"-"+object2
 	
 	# create objects to work on so as to not disturb input objects
 	cmd.create(cmpx, object1 + " or " + object2)
@@ -56,8 +56,8 @@ def interface_objects(object1, object2, cutoff=1.0):
  
 	# create objects from interface_selection
 	cmd.create(object1+"-"+object2+"_interaction", interface_selection)
-	cmd.create(object1+"_interface", interface_selection+" and chain " + obj1_chain)
-	cmd.create(object2+"_interface", interface_selection+" and chain " + obj2_chain)
+	cmd.create(object1+"-interface-"+object2, interface_selection+" and chain " + obj1_chain)
+	cmd.create(object2+"-interface-"+object1, interface_selection+" and chain " + obj2_chain)
 
 	# remove temporary objects
 	cmd.delete(interface_selection)

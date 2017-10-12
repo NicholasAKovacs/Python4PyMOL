@@ -1,6 +1,6 @@
 from pymol import stored
  
-def interface_objects(object1, object2, cutoff=1.0):
+def objects_interface(object1, object2, cutoff=1.0):
 
 	# Set dot_solvent to SASA
 	cmd.set("dot_solvent", 1)
@@ -67,4 +67,4 @@ def interface_objects(object1, object2, cutoff=1.0):
  
 	return rVal
  
-cmd.extend(interface_objects)
+cmd.extend(objects_interface)

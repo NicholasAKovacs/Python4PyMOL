@@ -54,10 +54,18 @@ def objects_interface(object1, object2, cutoff=1.0):
 			# not to kill PyMOL; but, it might take a little longer to run.
 			cmd.select( interface_selection, interface_selection + " or (%s and i. %s)" % (model,resi))
  
+ 	# Make interface variables
+	obj1_interface = object1+"-interface-"+object2
+	obj2_interface = object2+"-interface-"+object1
+
 	# create objects from interface_selection
 	cmd.create(object1+"-"+object2+"_interaction", interface_selection)
-	cmd.create(object1+"-interface-"+object2, interface_selection+" and chain " + obj1_chain)
-	cmd.create(object2+"-interface-"+object1, interface_selection+" and chain " + obj2_chain)
+	cmd.create(obj1_interface, interface_selection+" and chain " + obj1_chain)
+	cmd.create(obj2_interface, interface_selection+" and chain " + obj2_chain)
+
+	# Get the sequences of the interfaces
+	obj1_interface_seq = cmd.get_fastastr(obj1_interface)
+	obj2_interface_seq = cmd.get_fastastr(obj2_interface)
 
 	# remove temporary objects
 	cmd.delete(interface_selection)
